@@ -1,0 +1,2 @@
+This is a classification problem relating to the german south credit issue, need to predict the outcoem of providing credit to the cutomer based on his her credit history.
+Model was developed using basic neural network , data has been scaled as well.
