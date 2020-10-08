@@ -1,0 +1,21 @@
+Heroku Deployment
+
+gunicorn lib is required, so, pip install gunicorn
+create a requrements.txt , pip freeze requirements.txt
+create app.py , to make it as application file where the app instance is created using the Flask
+
+
+	# Create a Procfile
+		Note. File name should be exactly same without extension
+
+	# add below lines to the Procfile
+		web: gunicorn app:app
+
+	# git init
+	# git add .
+	# git commit -m "initial commit"
+	# heroku create
+	# git remote -v
+	# git push heroku master
+	# heroku logs  --tail
+
