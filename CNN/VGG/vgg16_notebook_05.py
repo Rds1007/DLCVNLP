@@ -156,3 +156,144 @@ print(output)
 
 import tensorflow as tf
 print(tf.__version__)
+
+##To create the classification matrixx and other matrices to see the proper results
+##Prepare the confusion matrix fo this model resnet50 for 5 class image classification
+##On Trained Data
+import numpy as np
+from keras.preprocessing import image
+from keras.models import load_model
+from  matplotlib import pyplot as plt
+import pandas as pd
+import os
+listing =[]
+classes = ['cat','cow','horse','nikita','ram']
+model = load_model('/content/drive/My Drive/Multiclass_cnn/vgg16_mymodel_5.h5')
+for cls in classes:
+  for count, filename in enumerate(os.listdir("/content/drive/My Drive/Multiclass_cnn/Multi/"+cls)):
+    test_image = image.load_img(r'/content/drive/My Drive/Multiclass_cnn/Multi/'+cls+'/'+filename, target_size = (224,224))
+    #plt.imshow(test_image,cmap='gray')
+    test_image = image.img_to_array(test_image)
+    test_image = np.expand_dims(test_image, axis = 0)
+    result = model.predict(test_image)
+    result = result[0]
+    label_name = {classes[i]: result[i] for i in range(len(result))}
+    output = max(label_name, key=label_name.get)
+    listing.append((cls,output))
+  
+x=pd.DataFrame(listing, columns=('Actual', 'Predicted'))
+
+# Example of a confusion matrix in Python
+from sklearn.metrics import confusion_matrix
+from sklearn import preprocessing
+import seaborn as sns
+import matplotlib.pyplot as plt
+le= preprocessing.LabelEncoder()
+
+x['Actual']=le.fit_transform(x['Actual'])
+x['Predicted']=le.fit_transform(x['Predicted'])
+
+results = confusion_matrix(x['Actual'], x['Predicted'])
+print(results)
+
+plt.figure()
+sns.heatmap(results, annot=True)
+plt.xlabel('Actual')
+plt.ylabel('Predicted')
+
+from sklearn.metrics import classification_report
+print(classification_report(x['Actual'],x['Predicted']))
+
+##Prepare the confusion matrix fo this model resnet50 for 5 class image classification
+##On test Data 
+import numpy as np
+from keras.preprocessing import image
+from keras.models import load_model
+from  matplotlib import pyplot as plt
+import pandas as pd
+import os
+listing =[]
+classes = ['cat','cow','horse','nikita','ram']
+model = load_model('/content/drive/My Drive/Multiclass_cnn/mymodelresnet1_5.h5')
+for cls in classes:
+  for count, filename in enumerate(os.listdir("/content/drive/My Drive/Multiclass_cnn/Multi_test/"+cls)):
+    test_image = image.load_img(r'/content/drive/My Drive/Multiclass_cnn/Multi_test/'+cls+'/'+filename, target_size = (224,224))
+    #plt.imshow(test_image,cmap='gray')
+    test_image = image.img_to_array(test_image)
+    test_image = np.expand_dims(test_image, axis = 0)
+    result = model.predict(test_image)
+    result = result[0]
+    label_name = {classes[i]: result[i] for i in range(len(result))}
+    output = max(label_name, key=label_name.get)
+    listing.append((cls,output))
+  
+x=pd.DataFrame(listing, columns=('Actual', 'Predicted'))
+
+# Example of a confusion matrix in Python
+from sklearn.metrics import confusion_matrix
+from sklearn import preprocessing
+import seaborn as sns
+import matplotlib.pyplot as plt
+le= preprocessing.LabelEncoder()
+
+x['Actual']=le.fit_transform(x['Actual'])
+x['Predicted']=le.fit_transform(x['Predicted'])
+
+results = confusion_matrix(x['Actual'], x['Predicted'])
+print(results)
+
+plt.figure()
+sns.heatmap(results, annot=True)
+plt.xlabel('Actual')
+plt.ylabel('Predicted')
+
+ls -lart /content/drive/'My Drive'/Multiclass_cnn/Multi_test/horse |wc -l
+
+from sklearn.metrics import classification_report
+print(classification_report(x['Actual'],x['Predicted']))
+
+##Prepare the confusion matrix fo this model resnet50 for 5 class image classification
+##On test Data 
+import numpy as np
+from keras.preprocessing import image
+from keras.models import load_model
+from  matplotlib import pyplot as plt
+import pandas as pd
+import os
+listing =[]
+classes = ['cat','cow','horse','nikita','ram']
+model = load_model('/content/drive/My Drive/Multiclass_cnn/mymodelresnet1_5.h5')
+for cls in classes:
+  for count, filename in enumerate(os.listdir("/content/drive/My Drive/Multiclass_cnn/testmodel/"+cls)):
+    test_image = image.load_img(r'/content/drive/My Drive/Multiclass_cnn/testmodel/'+cls+'/'+filename, target_size = (224,224))
+    #plt.imshow(test_image,cmap='gray')
+    test_image = image.img_to_array(test_image)
+    test_image = np.expand_dims(test_image, axis = 0)
+    result = model.predict(test_image)
+    result = result[0]
+    label_name = {classes[i]: result[i] for i in range(len(result))}
+    output = max(label_name, key=label_name.get)
+    listing.append((cls,output))
+  
+x=pd.DataFrame(listing, columns=('Actual', 'Predicted'))
+
+# Example of a confusion matrix in Python
+from sklearn.metrics import confusion_matrix
+from sklearn import preprocessing
+import seaborn as sns
+import matplotlib.pyplot as plt
+le= preprocessing.LabelEncoder()
+
+x['Actual']=le.fit_transform(x['Actual'])
+x['Predicted']=le.fit_transform(x['Predicted'])
+
+results = confusion_matrix(x['Actual'], x['Predicted'])
+print(results)
+
+plt.figure()
+sns.heatmap(results, annot=True)
+plt.xlabel('Actual')
+plt.ylabel('Predicted')
+
+from sklearn.metrics import classification_report
+print(classification_report(x['Actual'],x['Predicted']))
